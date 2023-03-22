@@ -1,4 +1,5 @@
-from math import cos, sqrt
+from datetime import timedelta, datetime
+from math import cos, sqrt, radians
 
 
 class GeographicalDistanceCalculator:
@@ -35,10 +36,15 @@ class GeographicalDistanceCalculator:
 
     def K_1(self):
         mean_lat = self.mean_lat()
-        # TODO: Convert to radians
+        mean_lat = radians(mean_lat)
         return 111.13209 - (0.56605 * cos(2 * mean_lat)) + (0.00120 * cos(4 * mean_lat))
 
     def K_2(self):
         mean_lat = self.mean_lat()
-        # TODO: convert to radians
+        mean_lat = radians(mean_lat)
         return (111.41513 * cos(mean_lat)) - (0.09455 * cos(3 * mean_lat)) + (0.00012 * cos(5 * mean_lat))
+
+
+def parse_date_string(value: str) -> timedelta:
+    t = datetime.strptime(value, "%H:%M:%S")
+    return timedelta(hours=t.hour, minutes=t.minute, seconds=t.second)

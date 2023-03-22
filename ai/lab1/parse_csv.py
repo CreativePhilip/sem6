@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Iterable, TypedDict
 
 from adjacency_list import AdjacencyList
-from mpk_graph_node import MpkGraphNode
+from mpk_graph_node import MpkGraphEdge
 
 
 class ConnectionGraphType(TypedDict):
@@ -28,11 +28,11 @@ def load_csv(filename: str = "connection_graph.csv") -> AdjacencyList:
     return parse_into_adjacency_list(it)
 
 
-def parse_into_model(instance: ConnectionGraphType) -> MpkGraphNode:
-    return MpkGraphNode(**instance)
+def parse_into_model(instance: ConnectionGraphType) -> MpkGraphEdge:
+    return MpkGraphEdge(**instance)
 
 
-def parse_into_adjacency_list(it: Iterable[MpkGraphNode]) -> AdjacencyList:
+def parse_into_adjacency_list(it: Iterable[MpkGraphEdge]) -> AdjacencyList:
     adj_list: AdjacencyList = {}
 
     for node in it:
